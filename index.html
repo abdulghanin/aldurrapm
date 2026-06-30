@@ -762,35 +762,21 @@ input,textarea,select{font-family:inherit}
    ============================================================ */
 #hero.pm-hero{display:block;min-height:100svh;padding-top:0;background:#050E1A;isolation:isolate}
 .pm-hero-slider{position:relative;min-height:100svh;overflow:hidden;background:#050E1A}
-.pm-hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.15s ease,visibility 1.15s ease;z-index:0}
-.pm-hero-slide.is-active{opacity:1;visibility:visible;z-index:1}
-.pm-hero-media{position:absolute;inset:-3%;overflow:hidden}
-.pm-hero-img{width:100%;height:100%;object-fit:cover;transform:translate3d(var(--pm-parallax-x,0),var(--pm-parallax-y,0),0) scale(1.08);filter:saturate(1.08) contrast(1.05);transition:transform 1.15s ease-out;will-change:transform}
-.pm-hero-slide.is-active .pm-hero-img{animation:pmKenBurns 5s ease-out forwards}
-.pm-hero-slide[data-origin="left"].is-active .pm-hero-img{transform-origin:left center}
-.pm-hero-slide[data-origin="right"].is-active .pm-hero-img{transform-origin:right center}
-.pm-hero-slide[data-origin="top"].is-active .pm-hero-img{transform-origin:center top}
+.pm-hero-video-bg{position:absolute;inset:0;z-index:0;overflow:hidden;background:#050E1A}
+.pm-hero-video-bg video{width:100%;height:100%;object-fit:cover;transform:translate3d(var(--pm-parallax-x,0),var(--pm-parallax-y,0),0) scale(1.08);filter:saturate(1.18) contrast(1.12) brightness(0.88);opacity:0.96;will-change:transform}
+.pm-hero-video-bg::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(5,14,26,0.90) 0%,rgba(7,25,41,0.68) 38%,rgba(7,25,41,0.24) 72%,rgba(5,14,26,0.50) 100%);pointer-events:none}
+.pm-hero-video-bg::after{content:'';position:absolute;inset:0;z-index:2;background:radial-gradient(circle at 76% 26%,rgba(226,195,135,0.22),transparent 30%),radial-gradient(circle at 20% 78%,rgba(26,92,150,0.20),transparent 34%),linear-gradient(180deg,rgba(5,14,26,0.18),rgba(5,14,26,0.42));pointer-events:none}
 .pm-hero-glass{background:linear-gradient(135deg,rgba(255,255,255,0.12),rgba(255,255,255,0.035));border:1px solid rgba(255,255,255,0.14);box-shadow:0 28px 80px rgba(0,0,0,0.28);backdrop-filter:blur(18px)}
-.pm-hero-progress{transform-origin:right center;animation:pmProgress 5s linear forwards}
-.pm-hero-dot.is-active{width:2.25rem;background:var(--gold);border-color:var(--gold)}
-.pm-hero-dot.is-active span{opacity:1}
-.pm-hero-arrow{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);backdrop-filter:blur(14px)}
-.pm-hero-arrow:hover{background:var(--gold);border-color:var(--gold);color:#071929;transform:translateY(-1px)}
 .pm-hero-layer{transform:translate3d(calc(var(--pm-parallax-x,0) * -0.35),calc(var(--pm-parallax-y,0) * -0.35),0);transition:transform 0.2s ease-out;will-change:transform}
-@keyframes pmKenBurns{
-  from{transform:translate3d(var(--pm-parallax-x,0),var(--pm-parallax-y,0),0) scale(1.06)}
-  to{transform:translate3d(var(--pm-parallax-x,0),var(--pm-parallax-y,0),0) scale(1.16)}
-}
-@keyframes pmProgress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.pm-hero-slider::after{content:'';position:absolute;inset:0;z-index:4;background:linear-gradient(180deg,rgba(5,14,26,0.36) 0%,transparent 22%,transparent 66%,rgba(5,14,26,0.72) 100%);box-shadow:inset 0 0 160px rgba(0,0,0,0.58);pointer-events:none}
 @media(max-width:767px){
   #hero.pm-hero{min-height:100svh;padding-top:0}
   .pm-hero-slider{min-height:100svh}
-  .pm-hero-media{inset:-2%}
-  .pm-hero-slide.is-active .pm-hero-img{animation-duration:5s}
-  .pm-hero-dot.is-active{width:1.9rem}
+  .pm-hero-video-bg video{opacity:0.98;filter:saturate(1.12) contrast(1.08) brightness(0.82)}
+  .pm-hero-video-bg::before{background:linear-gradient(180deg,rgba(5,14,26,0.64),rgba(5,14,26,0.84))}
 }
 @media(prefers-reduced-motion:reduce){
-  .pm-hero-slide,.pm-hero-img,.pm-hero-progress,.pm-hero-layer{animation:none!important;transition:none!important}
+  .pm-hero-layer,.pm-hero-video-bg video{animation:none!important;transition:none!important}
 }
 </style>
 </head>
@@ -859,130 +845,36 @@ input,textarea,select{font-family:inherit}
 <!-- ========== HERO ========== -->
 <section id="hero" class="pm-hero" aria-label="Al Durra premium project management hero">
   <div id="pmHeroSlider" class="pm-hero-slider" dir="rtl">
-    <div class="pm-hero-slide is-active" data-origin="right">
-      <div class="pm-hero-media">
-        <img class="pm-hero-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=82" srcset="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=76 900w, https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=80 1400w, https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=82 1920w" sizes="100vw" alt="Dubai skyline cinematic 3D business district" fetchpriority="high" />
-      </div>
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,14,26,0.94),rgba(7,25,41,0.78)_42%,rgba(7,25,41,0.34)_100%)]"></div>
+    <div class="pm-hero-video-bg" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="backgrond.mp4" type="video/mp4" />
+      </video>
     </div>
-    <div class="pm-hero-slide" data-origin="left">
-      <div class="pm-hero-media">
-        <img class="pm-hero-img" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&q=82" srcset="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=900&q=76 900w, https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1400&q=80 1400w, https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&q=82 1920w" sizes="100vw" alt="Smart construction site with digital project controls" loading="lazy" />
-      </div>
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,14,26,0.94),rgba(9,30,54,0.74)_48%,rgba(9,30,54,0.28)_100%)]"></div>
-    </div>
-    <div class="pm-hero-slide" data-origin="top">
-      <div class="pm-hero-media">
-        <img class="pm-hero-img" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=82" srcset="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=76 900w, https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80 1400w, https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=82 1920w" sizes="100vw" alt="Luxury office building with premium corporate facade" loading="lazy" />
-      </div>
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,14,26,0.95),rgba(10,35,61,0.74)_45%,rgba(10,35,61,0.30)_100%)]"></div>
-    </div>
-    <div class="pm-hero-slide" data-origin="right">
-      <div class="pm-hero-media">
-        <img class="pm-hero-img" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1920&q=82" srcset="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=76 900w, https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80 1400w, https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1920&q=82 1920w" sizes="100vw" alt="Facility management command center in a modern building" loading="lazy" />
-      </div>
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,14,26,0.95),rgba(9,32,55,0.76)_46%,rgba(9,32,55,0.30)_100%)]"></div>
-    </div>
-    <div class="pm-hero-slide" data-origin="left">
-      <div class="pm-hero-media">
-        <img class="pm-hero-img" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=82" srcset="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=76 900w, https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=80 1400w, https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=82 1920w" sizes="100vw" alt="Mega infrastructure project with cinematic construction scale" loading="lazy" />
-      </div>
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,14,26,0.94),rgba(10,34,58,0.75)_46%,rgba(10,34,58,0.28)_100%)]"></div>
-    </div>
-    <div class="pm-hero-slide" data-origin="top">
-      <div class="pm-hero-media">
-        <img class="pm-hero-img" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1920&q=82" srcset="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=900&q=76 900w, https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1400&q=80 1400w, https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1920&q=82 1920w" sizes="100vw" alt="Futuristic smart city and digital urban planning" loading="lazy" />
-      </div>
-      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,14,26,0.95),rgba(10,35,61,0.74)_48%,rgba(10,35,61,0.26)_100%)]"></div>
-    </div>
-
     <div class="pointer-events-none absolute inset-0 z-[2] opacity-30 [background-image:linear-gradient(rgba(200,164,93,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(200,164,93,0.08)_1px,transparent_1px)] [background-size:72px_72px]"></div>
     <div class="pointer-events-none absolute inset-0 z-[3] bg-[radial-gradient(circle_at_22%_24%,rgba(226,195,135,0.22),transparent_32%),radial-gradient(circle_at_78%_68%,rgba(26,92,150,0.18),transparent_32%)]"></div>
 
     <div class="container relative z-10 flex min-h-[100svh] items-center pt-24 pb-20 md:pt-28">
       <div class="grid w-full items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div class="pm-hero-layer max-w-3xl">
-          <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[#C8A45D]/40 bg-white/10 px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[#E2C387] backdrop-blur-md">
-            <i class="fas fa-gem"></i>
-            Al Durra Project Management
-          </div>
+          
           <h1 class="max-w-4xl text-[clamp(2.15rem,7vw,5.45rem)] font-black leading-[1.05] text-white">
             إدارة مشاريع ومنشآت
             <span class="block text-[#E2C387]">برؤية فاخرة وذكية</span>
           </h1>
           <p id="pmHeroCaption" class="mt-5 max-w-2xl text-[clamp(0.95rem,2vw,1.18rem)] leading-8 text-white/70">
-            دبي سكايلاين: قيادة تنفيذية للمشاريع الكبرى من التخطيط إلى التسليم.
+            إدارة مشاريع ومنشآت باحترافية ووضوح.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="#contact" class="btn btn-gold"><i class="fas fa-calendar-check"></i> استشارة مجانية</a>
             <a href="#projects" class="btn btn-ghost"><i class="fas fa-folder-open"></i> مشاهدة المشاريع</a>
           </div>
-          <div class="mt-9 grid max-w-2xl grid-cols-3 gap-3 text-white">
-            <div class="pm-hero-glass rounded-2xl p-4">
-              <div class="text-2xl font-black text-[#E2C387]"><i class="fas fa-route"></i></div>
-              <div class="mt-2 text-xs font-bold text-white/80">تخطيط المسار</div>
-            </div>
-            <div class="pm-hero-glass rounded-2xl p-4">
-              <div class="text-2xl font-black text-[#E2C387]"><i class="fas fa-shield-halved"></i></div>
-              <div class="mt-2 text-xs font-bold text-white/80">إدارة المخاطر</div>
-            </div>
-            <div class="pm-hero-glass rounded-2xl p-4">
-              <div class="text-2xl font-black text-[#E2C387]"><i class="fas fa-chart-line"></i></div>
-              <div class="mt-2 text-xs font-bold text-white/80">تقارير ذكية</div>
-            </div>
-          </div>
+         
         </div>
 
-        <div class="pm-hero-layer hidden lg:block">
-          <div class="pm-hero-glass ms-auto max-w-sm rounded-[1.35rem] p-6 text-white">
-            <div class="flex items-center justify-between border-b border-white/10 pb-4">
-              <div>
-                <div class="text-xs uppercase tracking-[0.22em] text-white/40">Current Focus</div>
-                <div id="pmHeroTitle" class="mt-1 text-xl font-black text-white">Dubai Skyline</div>
-              </div>
-              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#C8A45D]/20 text-[#E2C387]">
-                <i id="pmHeroIcon" class="fas fa-city"></i>
-              </div>
-            </div>
-            <div class="mt-5 space-y-4">
-              <div>
-                <div class="mb-2 flex justify-between text-xs text-white/50"><span>Governance</span><span>98%</span></div>
-                <div class="h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-[98%] rounded-full bg-[#C8A45D]"></div></div>
-              </div>
-              <div>
-                <div class="mb-2 flex justify-between text-xs text-white/50"><span>Cost Control</span><span>94%</span></div>
-                <div class="h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-[94%] rounded-full bg-[#E2C387]"></div></div>
-              </div>
-              <div class="grid grid-cols-2 gap-3 pt-2">
-                <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-3">
-                  <div class="text-lg font-black text-[#E2C387]">24/7</div>
-                  <div class="text-[0.65rem] text-white/40">Monitoring</div>
-                </div>
-                <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-3">
-                  <div class="text-lg font-black text-[#E2C387]">360°</div>
-                  <div class="text-[0.65rem] text-white/40">Delivery View</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      
       </div>
     </div>
 
-    <div class="absolute inset-x-0 bottom-0 z-20">
-      <div class="container pb-5">
-        <div class="flex items-center justify-between gap-4">
-          <div class="hidden items-center gap-2 md:flex">
-            <button type="button" class="pm-hero-arrow flex h-11 w-11 items-center justify-center rounded-full text-white transition" data-pm-prev aria-label="Previous slide"><i class="fas fa-chevron-right"></i></button>
-            <button type="button" class="pm-hero-arrow flex h-11 w-11 items-center justify-center rounded-full text-white transition" data-pm-next aria-label="Next slide"><i class="fas fa-chevron-left"></i></button>
-          </div>
-          <div class="flex flex-1 items-center justify-center gap-2 md:justify-end" data-pm-dots aria-label="Hero slide navigation"></div>
-        </div>
-        <div class="mt-4 h-[2px] overflow-hidden rounded-full bg-white/10">
-          <div class="pm-hero-progress h-full w-full bg-[#C8A45D]" data-pm-progress></div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1472,71 +1364,6 @@ input,textarea,select{font-family:inherit}
 
   const pmHero = document.getElementById('pmHeroSlider');
   if(pmHero){
-    const slides = Array.from(pmHero.querySelectorAll('.pm-hero-slide'));
-    const dotsWrap = pmHero.querySelector('[data-pm-dots]');
-    const prevBtn = pmHero.querySelector('[data-pm-prev]');
-    const nextBtn = pmHero.querySelector('[data-pm-next]');
-    const progress = pmHero.querySelector('[data-pm-progress]');
-    const titleEl = document.getElementById('pmHeroTitle');
-    const iconEl = document.getElementById('pmHeroIcon');
-    const captionEl = document.getElementById('pmHeroCaption');
-    const slideMeta = [
-      { title:'Dubai Skyline', icon:'fas fa-city', caption:'دبي سكايلاين: قيادة تنفيذية للمشاريع الكبرى من التخطيط إلى التسليم.' },
-      { title:'Smart Construction Site', icon:'fas fa-helmet-safety', caption:'موقع بناء ذكي: متابعة رقمية للجدول والتكلفة والجودة لحظة بلحظة.' },
-      { title:'Luxury Office Building', icon:'fas fa-building', caption:'مبان مكتبية فاخرة: حوكمة دقيقة وتجربة تسليم تليق بالأصول المميزة.' },
-      { title:'Facility Management', icon:'fas fa-screwdriver-wrench', caption:'إدارة المنشآت: تشغيل وصيانة مستدامة تحافظ على قيمة المبنى وكفاءته.' },
-      { title:'Mega Infrastructure Project', icon:'fas fa-bridge', caption:'مشاريع بنية تحتية ضخمة: تنسيق أصحاب المصلحة وتقليل المخاطر قبل التنفيذ.' },
-      { title:'Futuristic Smart City', icon:'fas fa-microchip', caption:'مدينة ذكية مستقبلية: تطوير حضري مبني على البيانات وجاهزية التشغيل.' }
-    ];
-    let active = 0;
-    let timerId;
-    const interval = 5000;
-
-    const dots = slides.map((_, index) => {
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'pm-hero-dot relative h-2.5 w-2.5 rounded-full border border-white/30 bg-white/30 transition-all duration-300';
-      dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-      dot.innerHTML = '<span class="absolute -top-7 left-1/2 hidden -translate-x-1/2 text-[0.62rem] font-bold text-white/60 opacity-0 transition md:block">' + String(index + 1).padStart(2, '0') + '</span>';
-      dot.addEventListener('click', () => goTo(index));
-      dotsWrap.appendChild(dot);
-      return dot;
-    });
-
-    function restartProgress(){
-      if(!progress) return;
-      progress.classList.remove('pm-hero-progress');
-      void progress.offsetWidth;
-      progress.classList.add('pm-hero-progress');
-    }
-
-    function render(){
-      slides.forEach((slide, index) => slide.classList.toggle('is-active', index === active));
-      dots.forEach((dot, index) => {
-        dot.classList.toggle('is-active', index === active);
-        dot.setAttribute('aria-current', index === active ? 'true' : 'false');
-      });
-      const meta = slideMeta[active];
-      if(titleEl) titleEl.textContent = meta.title;
-      if(captionEl) captionEl.textContent = meta.caption;
-      if(iconEl) iconEl.className = meta.icon;
-      restartProgress();
-    }
-
-    function goTo(index){
-      active = (index + slides.length) % slides.length;
-      render();
-      resetTimer();
-    }
-
-    function resetTimer(){
-      window.clearInterval(timerId);
-      timerId = window.setInterval(() => goTo(active + 1), interval);
-    }
-
-    prevBtn?.addEventListener('click', () => goTo(active - 1));
-    nextBtn?.addEventListener('click', () => goTo(active + 1));
-
     pmHero.addEventListener('pointermove', (event) => {
       if(window.matchMedia('(max-width: 767px)').matches) return;
       const rect = pmHero.getBoundingClientRect();
@@ -1555,14 +1382,6 @@ input,textarea,select{font-family:inherit}
       const offset = Math.min(window.scrollY * 0.08, 34);
       pmHero.style.setProperty('--pm-parallax-y', `${offset}px`);
     }, { passive:true });
-
-    document.addEventListener('visibilitychange', () => {
-      if(document.hidden) window.clearInterval(timerId);
-      else resetTimer();
-    });
-
-    render();
-    resetTimer();
   }
 })();
 </script>
